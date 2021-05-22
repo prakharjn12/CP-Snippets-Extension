@@ -62,5 +62,39 @@
             "}"
         ],
         "description": "anagram-strings"
+    },
+    "string->decimal": {
+        "prefix": "strtodec",
+        "body": [
+            "long long int string_to_decimal(string s)",
+            "{",
+            "	long long int ans=0,p=1;",
+            "    for(int i=s.size()-1;i>=0;i--)",
+            "    {",
+            "		ans+= p*(s[i]-'0');",
+            "		p=p*10;",
+            "	}",
+            "	return ans;",
+            "}"
+        ],
+        "description": "string->decimal"
+    },
+    "decimal->string": {
+        "prefix": "dectostr",
+        "body": [
+            "string decimal_to_string(long long int n)",
+            "{",
+            "	if(n==0) return \"0\";",
+            "	string ans=\"\";",
+            "	while(n>0)",
+            "	{",
+            "		ans=ans+(char)((n%10)+48);",
+            "		n=n/10;",
+            "	}",
+            "	reverse(ans.begin(),ans.end());",
+            "	return ans;",
+            "}"
+        ],
+        "description": "decimal->string"
     }
 }
