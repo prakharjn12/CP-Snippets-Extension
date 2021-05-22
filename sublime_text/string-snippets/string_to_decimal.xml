@@ -1,0 +1,18 @@
+<snippet>
+  <content><![CDATA[
+long long int string_to_decimal(string s)
+{
+	long long int ans=0,p=1;
+    for(int i=s.size()-1;i>=0;i--)
+    {
+		ans+= p*(s[i]-'0');
+		p=p*10;
+	}
+	return ans;
+}
+]]></content>
+  <tabTrigger>strtodec</tabTrigger>
+  <description>string->decimal</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope >source.c++</scope >
+</snippet>
