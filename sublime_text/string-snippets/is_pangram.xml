@@ -1,0 +1,24 @@
+<snippet>
+  <content><![CDATA[
+bool ispangram(string s)
+{
+    int n=s.size();
+    int f[26]={0}; 
+    for(int i=0;i<n;i++)  
+     {
+         if(s[i]>='a' && s[i]<='z') 
+          f[s[i]-97]++;
+         else
+         if(s[i]>='A' && s[i]<='Z') 
+          f[s[i]-65]++;
+     }
+     for(int i=0;i<26;i++)
+     if(f[i]==0) return 0;
+    return 1;
+}
+]]></content>
+  <tabTrigger>pangram</tabTrigger>
+  <description>pangram-string</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope >source.c++</scope >
+</snippet>
