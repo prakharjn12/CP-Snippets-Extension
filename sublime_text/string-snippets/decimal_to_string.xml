@@ -1,0 +1,20 @@
+<snippet>
+  <content><![CDATA[
+string decimal_to_string(long long int n)
+{
+	if(n==0) return "0";
+	string ans="";
+	while(n>0)
+	{
+		ans=ans+(char)((n%10)+48);
+		n=n/10;
+	}
+	reverse(ans.begin(),ans.end());
+	return ans;
+}
+]]></content>
+  <tabTrigger>dectostr</tabTrigger>
+  <description>decimal->string</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope >source.c++</scope >
+</snippet>
