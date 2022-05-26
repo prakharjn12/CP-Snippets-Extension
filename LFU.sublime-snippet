@@ -1,0 +1,73 @@
+<snippet>
+  <content><![CDATA[
+// #define ll int 
+// #define pll pair<ll,ll>
+// #define f first
+// #define s second
+struct LFU
+{
+    ll n;   // max capacity of cache
+    ll now; // current size of cache
+    ll minfreq;  // min freq a key has in the current cache
+    unordered_map<ll,pll>ma;       
+    unordered_map<ll,list<ll>::iterator>mIter; 
+    unordered_map<ll,list<ll>>freq;  
+
+   // NOTE  
+   // 1: most recenty used item is at the end
+   // 2: least recently used item is at beginning
+   // 3:  ma    :  <key,<val,freq>>  
+   // 4:  mIter :  <key,pointer>
+   // 5:  freq  :  <freq1 : key1,key2....> 
+
+    void init(ll nn) { n=nn; now=0;}
+
+  ll get(ll key)
+   {
+      if(ma.count(key)==0) return -1; // key doesnt exist
+      freq[ma[key].s].erase(mIter[key]);  //erase from prev freq
+      ma[key].s++;                    //increase freq of this key
+      freq[ma[key].second].push_back(key); //insert in new freq
+
+      mIter[key]=--freq[ma[key].s].end();
+        
+        if(freq[minfreq].size()==0)
+         minfreq++; 
+        return ma[key].f;
+   }
+   void put(pll v)
+    {
+    	ll key=v.f; ll val=v.s;
+        if(n<=0) return;
+        
+        if(get(key)!=-1)  // this key already existed //
+        {
+            ma[key].first=val;
+            return;
+        }
+        
+        if(now>=n) //cache is full
+        {
+            ma.erase( freq[minfreq].front()); //least recent used from min frequency
+            mIter.erase(freq[minfreq].front());
+            freq[minfreq].pop_front();
+            now--;
+        }
+        
+        ma[key]={val, 1};
+        freq[1].push_back(key);
+        mIter[key]=--freq[1].end();
+        minfreq=1;
+        now++;
+    }
+};
+// LFU lfu
+// lfu.init(n);
+// lfu.get(key);
+// lfu.put({key,val});
+]]></content>
+  <tabTrigger>LFU</tabTrigger>
+  <description>Least frequently used</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

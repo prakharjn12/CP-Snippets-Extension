@@ -1,0 +1,30 @@
+<snippet>
+  <content><![CDATA[
+//call cycleInUndirectedGraph function to check cycle
+bool dfs(int s, int p, vector<int> adj[], vector<bool> &vis) {
+   vis[s] = true;
+   for (int v : adj[s]) {
+      if (!vis[v]){
+         if(dfs(v, s, adj, vis))return true;
+      }
+      else if (v != p)return true;
+   }
+   return false;
+}
+
+bool cycleInUndirectedGraph(vector<int> adj[], int n)
+{
+   vector<bool> vis(n, false);
+   for (int u = 0; u < n; u++) {
+      if (!vis[u]) {
+         if (dfs(u, -1, adj, vis))return true;
+      }
+   }
+   return false;
+}
+]]></content>
+  <tabTrigger>cycleInUnDirectedGraph</tabTrigger>
+  <description>Check cycle in undirected Graph</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

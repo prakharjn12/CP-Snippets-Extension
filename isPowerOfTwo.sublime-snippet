@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+bool isPowerOfTwo(int n) {
+  return n && (!(n & (n - 1)));
+}
+]]></content>
+  <tabTrigger>isPowerOfTwo</tabTrigger>
+  <description>Check number is power of two</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

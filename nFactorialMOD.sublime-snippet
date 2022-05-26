@@ -1,0 +1,15 @@
+<snippet>
+  <content><![CDATA[
+// n!%mod  ,for ex mod=1e9+7
+int nFactorialMOD(int n, int mod)
+{
+  int ans = 1;
+  for (int i = 2; i <= n; i++)(ans *= i) %= mod;
+  return ans;
+}
+]]></content>
+  <tabTrigger>nFactorialMOD</tabTrigger>
+  <description>return n!%mod</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

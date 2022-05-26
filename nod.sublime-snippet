@@ -1,0 +1,17 @@
+<snippet>
+  <content><![CDATA[
+ // sieve();
+  ll nod[N+1];
+  nod[1]=0;
+  rep(i,2,20000000)
+  {
+    ll j=i/prime[i];
+    nod[i]=nod[j];
+    if(prime[i]!=prime[j]) nod[i]++;
+  }
+]]></content>
+  <tabTrigger>no_of_primedivisors</tabTrigger>
+  <description>nod</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

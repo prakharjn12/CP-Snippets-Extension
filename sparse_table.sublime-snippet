@@ -1,0 +1,32 @@
+<snippet>
+  <content><![CDATA[
+int n,q,i,j;
+    cin>>n;
+    ll a[n+1];
+    for(i=1;i<=n;i++) {cin>>a[i];}
+    int l=log2(n);
+    int dp[l+1][n+1];
+    memset(dp,0,sizeof(dp));
+    for(i=1;i<=n;i++)
+        dp[0][i]=a[i];
+
+    for(i=1;i<=l;i++)
+    {
+        for(j=1; j + (1<<i)-1 <=n;j++)
+            dp[i][j]=min(dp[i-1][j],dp[i-1][j+ (1<<(i-1))]);
+    }
+    cin>>q;
+    while(q--)
+    {
+        int l,r;
+
+        cin>>l>>r;
+        int x=log2(r-l+1);
+        cout<<min(dp[x][l],dp[x][r- (1<<x)+1])<<endl;
+    }
+]]></content>
+  <tabTrigger>sparse_table</tabTrigger>
+  <description>sparse table</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

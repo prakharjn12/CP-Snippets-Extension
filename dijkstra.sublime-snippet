@@ -1,0 +1,40 @@
+<snippet>
+  <content><![CDATA[
+const ll N=200005;
+vpll vec[N];    
+ll dis[N]; 
+void dijkstra(ll s,ll n)
+{
+
+   set<pll>st;
+   st.insert({0,s});
+   rep(i,1,n) { dis[i]=high;}
+   dis[s]=0;
+
+   while(st.size())
+   {
+     pll here=*st.begin();
+     st.erase(st.begin());
+
+     ll d=here.f;
+     ll u=here.s;
+
+     for(pll vv:vec[u])
+     {
+       ll v=vv.f;
+       ll w=vv.s;
+
+       if(dis[v] > dis[u]+w)
+       {
+         dis[v]=dis[u]+w;
+         st.insert({dis[v],v});
+       }
+     }
+   }
+}  
+]]></content>
+  <tabTrigger>Dijkstra</tabTrigger>
+  <description>Dijkstra </description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

@@ -1,0 +1,58 @@
+<snippet>
+  <content><![CDATA[
+// #define ll int 
+// #define pll pair<ll,ll>
+// #define f first
+// #define s second
+struct LRU
+{
+    ll n;   // max capacity of cache
+    list<ll>l;  //list to store keys 
+    unordered_map<ll,ll>ma;  
+    unordered_map<ll,list<ll>::iterator>mIter; 
+
+    // NOTE  
+   // 1: most recenty used item is at the end
+   // 2: least recently used item is at beginning
+   // 3:  ma    :  <key,val>  
+   // 4:  mIter :  <key,pointer> 
+    void LRUcache(ll nn) { n=nn; }
+    void show() { for(auto it:l) cout<<it<<' '<<ma[it]<<endl;}
+
+  ll get(ll key)
+   {
+      if(ma.count(key)==0) return -1;  //key doesnt exist
+      l.erase(mIter[key]);   //erase from the list
+      l.push_back(key);      //put it in end as it is recently used
+      mIter[key]=--l.end();
+      return ma[key];
+   }
+   void put(pll v)
+    {
+          ll key=v.f; ll val=v.s;
+      if(get(key)!=-1) //already present then move at end
+            {
+                ma[key]=val;
+                return;
+            }
+        if(l.size()==n) //list is full,remove from beginning
+            {
+                ll toremove=l.front();
+                l.pop_front();
+                ma.erase(toremove);
+            }
+            ma[key]=val;
+            l.push_back(key);
+            mIter[key]=--l.end();
+   }
+};
+// LRU lru
+// lru.init(n);
+// lru.get(key);
+// lru.put({key,val});
+]]></content>
+  <tabTrigger>LRU</tabTrigger>
+  <description>least recently used</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

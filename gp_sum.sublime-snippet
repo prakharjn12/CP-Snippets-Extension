@@ -1,0 +1,32 @@
+<snippet>
+  <content><![CDATA[
+ll binpow(ll x, ll y) 
+{
+  ll res = 1;
+  x=x%mod; 
+  while(y>0)
+  { 
+      if(y&1) res=(res*x)%mod; 
+      y=y/2; 
+      x=(x*x)%mod; 
+  } 
+    return res; 
+}
+ll series(ll k,ll d) //k^1+k^2+k^3+...+k^d
+{
+    if(d==0){return 0;}
+    ll z=binpow(k,d/2);
+    ll x=series(k,d/2),y=(z*x)%mod,ans=(x+y)%mod;
+    if(d&1)
+    {
+        z=binpow(k,d);
+        ans=(ans+z)%mod;
+    }
+    return (ans)%mod;
+}
+]]></content>
+  <tabTrigger>gp_sum</tabTrigger>
+  <description>GP sum</description>
+  <!-- Optional: Set a scope to limit wherthe snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

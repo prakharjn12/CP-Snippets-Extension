@@ -1,0 +1,21 @@
+<snippet>
+  <content><![CDATA[
+bool line_check(pll p1,pll p2,pll p3)
+{
+    return (p2.s-p1.s)*(p3.f-p2.f)==(p3.s-p2.s)*(p2.f-p1.f);
+}
+bool lie_on_same_line(vpll v)
+{
+    if(v.size()<=2) return 1;
+    for(ll i=2;i<v.size();i++)
+    {
+        if(!line_check(v[0],v[1],v[i])) return 0;
+    }
+        return 1;
+}
+]]></content>
+  <tabTrigger>line_check</tabTrigger>
+  <description>geometry</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

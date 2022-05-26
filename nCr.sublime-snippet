@@ -1,0 +1,46 @@
+<snippet>
+  <content><![CDATA[
+ll fact[N],invfact[N];
+
+ll binpow(ll x,ll y)                 
+{
+   ll ans=1;
+   x%=mod;
+   while (y)
+    {
+        if(y%2==1) ans=(ans*x);
+        ans%=mod;
+        y = y/2; 
+        x = (x * x) % mod;
+    }
+    return ans;
+}
+ll modinv(ll n)
+{
+    return binpow(n,mod - 2);
+}
+
+void precompute()
+{
+  fact[0]=1;
+  invfact[0]=1;
+  rep(i,1,N-1)
+  {
+    fact[i]=(fact[i-1]*i)%mod;
+    invfact[i]=modinv(fact[i])%mod;
+  }
+}
+ll nCr(ll n , ll r)
+{
+   if (n < r) return 0;
+   if (r == 0) return 1;
+   return (fact[n]* ( (invfact[r] * invfact[n-r])%mod))%mod;         
+}
+
+//precompute(); must call in main
+]]></content>
+  <tabTrigger>nCr</tabTrigger>
+  <description>nCr%mod</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

@@ -1,0 +1,26 @@
+<snippet>
+  <content><![CDATA[
+//return sum all divisors
+int divisorFunction(int n)
+{
+  int ans = 1;
+  int power = 0;
+  while (n % 2 == 0)power++, n /= 2;
+  //sum of GP
+  ans *= (pow(2, power + 1) - 1);
+  for (int i = 3; i * i <= n; i += 2) {
+    power = 0;
+    while (n % i == 0) {
+      power++;
+      n /= i;
+    }
+    ans *= (pow(i, power + 1) - 1) / (i - 1);
+  }
+  return ans;
+}
+]]></content>
+  <tabTrigger>divisorFunction</tabTrigger>
+  <description>sum of all divisors</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

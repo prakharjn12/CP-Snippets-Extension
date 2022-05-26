@@ -1,0 +1,81 @@
+<snippet>
+  <content><![CDATA[
+const ll N=3000005;
+const ll sq=sqrt(N);
+ll a[N];
+ll freq[N];
+ll cnt;
+
+void add(ll l)
+{
+   if(freq[a[l]]==0) cnt++;
+   freq[a[l]]++;
+}
+void remove(ll l)
+{
+   if(freq[a[l]]==1) cnt--;
+   freq[a[l]]--;
+}
+bool comp(pair<pll,ll> &a ,pair<pll,ll> &b)
+{
+   if(a.f.f/sq == b.f.f/sq) return a.f.s<b.f.s ; 
+   else return a.f.f/sq < b.f.f/sq;
+}
+void solve() 
+{ 
+  ll n;
+  cin>>n;
+  rep(i,1,n) cin>>a[i];
+  ll q;
+  cin>>q;
+  ll ans[q+1];
+  vector<pair<pll,ll>>v;
+  rep(i,1,q)
+  {
+    ll l,r;
+    cin>>l>>r;
+    v.pb({{l,r},i});
+  }
+  sort(all(v),comp);
+  ll L=1,R=0; 
+  for(ll i=0;i<q;i++)
+  {
+     ll l=v[i].f.f;
+     ll r=v[i].f.s;
+     ll idx=v[i].s;
+     debug(mp(l,r));
+     // continue;
+    
+       while(r<R)
+     {
+         // remove L
+         remove(R--);
+     }
+       while(r>R)
+     {
+         // remove L
+         add(++R);
+     }
+     // debug(i) continue;
+      while(l<L)
+     {
+         // remove L
+         add(--L);
+     }
+       while(L<l)
+     {
+         // remove L
+         remove(L++);
+     }
+     debug(i)
+     ans[idx]=cnt;
+  }
+  rep(i,1,q) cout<<ans[i]<<endl;
+ // showa(ans,q);
+}
+]]></content>
+  <tabTrigger>mos</tabTrigger>
+  <description>Mo's algorithm to count frequency of numbers in range</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

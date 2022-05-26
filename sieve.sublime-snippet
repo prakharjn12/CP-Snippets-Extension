@@ -1,0 +1,23 @@
+<snippet>
+  <content><![CDATA[
+const ll N=200005;
+ll prime[N+1];
+vll v;
+void sieve()
+{
+  for(ll i=2;i<=N;i++)
+  {
+    if(prime[i]) continue;
+    prime[i]=i;
+    v.pb(i);
+    for(ll j=i*i;j<=N;j+=i)
+      prime[j]=i;
+  }
+}
+// sieve() call in main
+]]></content>
+  <tabTrigger>sieve</tabTrigger>
+  <description>sieve</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

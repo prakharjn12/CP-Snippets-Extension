@@ -1,0 +1,41 @@
+<snippet>
+  <content><![CDATA[
+ll LIS(ll a[], ll n) 
+{
+    vpll v;
+    ll par[n+1]={0}; //to restore the sequence
+    v.pb({a[1],1});
+    rep(i,2,n) 
+    {
+        pll here={a[i],0};
+        ll j=lower_bound(all(v), here)-v.begin();
+        if(j<v.size() && v[j].f==a[i]) continue;
+        here.s=i;
+
+        if(j==v.size()) 
+        {
+          par[i]=v[j-1].s;
+          v.pb(here); 
+        }
+        else {
+          if(j) par[i]=v[j-1].s;
+          v[j]=here;
+        }
+    }
+    vll ans;
+    ll x=v.back().s;
+    while(1)
+    {
+      ans.pb(a[x]);
+      x=par[x];
+      if(x==0) break;
+    }
+    reverse(all(ans));
+    return ans.size();
+} 
+]]></content>
+  <tabTrigger>LIS</tabTrigger>
+  <description>longest_increasing_subsequence</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

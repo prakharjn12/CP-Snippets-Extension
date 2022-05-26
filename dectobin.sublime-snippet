@@ -1,0 +1,19 @@
+<snippet>
+  <content><![CDATA[
+string dectobin(ll x)
+{
+  string ans="";
+  while(x)
+  {
+    ans+=  x%2 ? '1' : '0';
+    x/=2;
+  }
+  reverse(all(ans));
+  return ans;
+}
+]]></content>
+  <tabTrigger>dectobin</tabTrigger>
+  <description>dectobin</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

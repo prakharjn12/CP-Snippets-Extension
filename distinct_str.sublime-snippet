@@ -1,0 +1,14 @@
+<snippet>
+  <content><![CDATA[
+int distinct_str(string s) {
+  sort(s.begin(), s.end());
+  return unique(s.begin(), s.end()) - s.begin();
+}
+// time O(nlogn) 
+//space O(1)
+]]></content>
+  <tabTrigger>distinct_str</tabTrigger>
+  <description>count of distinct character in string</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

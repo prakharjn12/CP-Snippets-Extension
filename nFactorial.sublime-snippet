@@ -1,0 +1,15 @@
+<snippet>
+  <content><![CDATA[
+//when n! <1e18 and you need raw
+long long int nFactorial(int n)
+{
+  long long int ans = 1;
+  for (int i = 2; i <= n; i++)ans *= i;
+  return ans;
+}
+]]></content>
+  <tabTrigger>nFactorial</tabTrigger>
+  <description>return n!</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

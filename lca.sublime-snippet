@@ -1,0 +1,49 @@
+<snippet>
+  <content><![CDATA[
+const ll l=30;  // log(n)
+const ll N=200005;
+vll vec[N];
+ll up[N][l];
+ll depth[N],tin[N],tout[N];
+ll timer;
+void dfs(ll u, ll p)
+{
+   tin[u] = timer++;
+   up[u][0] = p;
+   rep(i,1,l-1) up[u][i] = up[up[u][i-1]][i-1];
+   depth[u]=depth[p]+1;
+   for(ll v:vec[u])
+   {
+    if(v==p) continue;
+    dfs(v,u);
+   }  
+   tout[u]=timer++;
+}
+bool is_ancestor(ll u, ll v)
+{
+    return tin[u] <= tin[v] && tout[u] >= tout[v];
+}
+ll lca(ll u, ll v)
+{
+    if (is_ancestor(u, v)) return u;
+    if (is_ancestor(v, u))  return v;
+    for (ll i = l-1; i >= 0; --i) 
+       if(!is_ancestor(up[u][i], v)) u = up[u][i];
+    
+    return up[u][0];
+}
+ll dist(ll u, ll v)
+{
+  return depth[u]+depth[v]-2*depth[lca(u,v)];
+}
+
+// timer=0;
+//  dfs(1,1);
+// lca(u,v);  
+// dist(u,v);
+]]></content>
+  <tabTrigger>lca</tabTrigger>
+  <description>lca</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

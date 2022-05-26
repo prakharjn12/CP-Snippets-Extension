@@ -1,0 +1,107 @@
+<snippet>
+  <content><![CDATA[
+struct node{
+  ll val;
+};
+struct lazy_segtree{
+    ll size=1,n;
+    node base={0};
+    vector<node>tree,lazy;
+
+    void init(ll nn)
+    {
+        n=nn;
+        while(size<n) size*=2;
+        tree.assign(2*size,base);
+        lazy.assign(2*size,base);
+    }
+    node merge(node s1,node s2)
+    {
+        node ans=base;
+        ans.val=s1.val+s2.val;
+        return ans;
+    }
+     void propagate(ll x,ll l,ll r)
+      {
+          tree[x].val += lazy[x].val;
+          if(l!=r)
+          {
+              lazy[2*x].val+=lazy[x].val;
+              lazy[2*x+1].val+=lazy[x].val;
+          }
+          lazy[x]=base;
+      }  
+    void build(ll a[],ll x, ll l, ll r)
+    {
+        if(l == r) 
+         {
+            tree[x].val = a[l];
+            return;
+         }
+        ll m =(l + r) / 2;
+        build(a,2*x,l,m);
+        build(a,2*x+1,m+1,r);
+
+        tree[x]=merge(tree[2*x],tree[2*x+1]);
+    }
+ 
+    void build(ll a[])
+       { 
+        build(a,1,1,n);
+       }
+     
+ 
+    void update(ll x,ll l,ll r,ll ql,ll qr,ll vv)
+    {
+        if(l>r)           return;
+        if(lazy[x].val)       propagate(x,l,r);
+        if(l>qr || r<ql)  return;
+ 
+        if(l>=ql && r<=qr)
+        {
+            lazy[x].val+=vv;
+            if(lazy[x].val) propagate(x,l,r);
+            return;
+        }
+         ll mid=(l+r)/2;
+         update(2*x,l,mid,ql,qr,vv);
+         update(2*x+1,mid+1,r,ql,qr,vv);
+         tree[x]=merge(tree[2*x],tree[2*x+1]);
+        
+    }
+ 
+    void update(ll ql, ll qr,ll val)
+    {
+      update(1,1,n,ql,qr,val);
+    }
+    node query(ll x,ll l,ll r,ll ql,ll qr)
+    {
+        if(l>r)                 return {0};
+        if(lazy[x].val)             propagate(x,l,r);
+        if(l>qr || r<ql)        return {0};
+        if(l>=ql && r<=qr)      return tree[x];
+        
+            ll mid=(l+r)/2;
+            node s1=query(2*x,l,mid,ql,qr);
+            node s2=query(2*x+1,mid+1,r,ql,qr);
+            return merge(s1,s2);
+        
+    }
+ 
+    node query(ll l,ll r)
+    {
+        return query(1,1,n,l,r);
+    }
+ 
+};
+ // lazy_segtree st;
+ // st.init(n);
+ // st.build(a);
+ // st.update(l,r,x);
+ // st.query(l,r).val;
+]]></content>
+  <tabTrigger>lazy_segtree</tabTrigger>
+  <description>lazy_segtree</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

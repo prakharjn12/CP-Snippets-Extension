@@ -1,0 +1,58 @@
+<snippet>
+  <content><![CDATA[
+struct ran_conngraph{
+  ll n,m;
+  vpll Edges;
+  vll weights;
+  map<pll,ll>ma;
+  void build(ll nn,ll mm)
+  {
+    n=nn;
+    m=mm;
+    rep(i,2,n) {
+        ll p = ran(1,i-1);
+        Edges.push_back({i,p});
+        ma[{i,p}]=1;
+        ma[{p,i}]=1;
+        ll w=ran(1,1000000000);
+        weights.push_back(w);
+    }
+
+    m-=n-1;
+    debug(m)
+    while(m--)
+    {
+      ll x=ran(1,n);
+      ll y=ran(1,n);
+      while(ma.count({x,y}) || x==y)
+      {
+       x=ran(1,n);
+       y=ran(1,n); 
+      }
+        Edges.push_back({x,y});
+        ma[{x,y}]=1;
+        ma[{y,x}]=1;
+        ll w=ran(1,1000000000);
+        weights.push_back(w);
+
+    }
+  }
+
+    void show()
+    {
+    rep(i,0,sz(Edges)-1)
+    {
+      cout<<Edges[i].f<<' '<<Edges[i].s<<' '
+        << weights[i] <<endl;
+    }
+  }
+};
+ // ran_conngraph g;
+ //  g.build(n,m);
+ //  g.show();
+]]></content>
+  <tabTrigger>ran_conngraph</tabTrigger>
+  <description>ran_conngraph</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

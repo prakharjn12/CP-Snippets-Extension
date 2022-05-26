@@ -1,0 +1,41 @@
+<snippet>
+  <content><![CDATA[
+vector<int> kmp(string s,string t)  //returns the indices of occurences of pattern t in string s
+{
+    if(s.size()<t.size())
+        return {};
+     
+     int n=s.size(),m=t.size();
+     int lps[m+1]={0};
+     int len = 0,i=1,j;
+    while (i < m) {
+        if (t[i] ==t[len]) lps[i++] = ++len;
+        else
+        {
+            if (len != 0) len = lps[len - 1];
+            else   lps[i++] = 0;
+                        
+        }
+    }
+   vector<int>ans;
+    i=0;j=0;
+    while (i<n) {
+        if (t[j] ==s[i]) { j++; i++; }
+          
+        if (j == m) {
+            ans.pb(i-j);
+            j=lps[j - 1];
+        }
+        else if (i < n && t[j]!=s[i]) {
+            
+            if (j != 0) j = lps[j - 1];
+            else i++;        }
+    }
+    return ans;
+}
+]]></content>
+  <tabTrigger>kmp</tabTrigger>
+  <description>KMP-Algo</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

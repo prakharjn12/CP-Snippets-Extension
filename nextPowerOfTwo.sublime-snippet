@@ -1,0 +1,14 @@
+<snippet>
+  <content><![CDATA[
+int nextPowerOfTwo(int n)
+{
+  //if n is power of two
+  if (n && (!n & (n - 1)))return n;
+  return 1 << ((int)ceil(log2(n)));
+}
+]]></content>
+  <tabTrigger>nextPowerOfTwo</tabTrigger>
+  <description>next power of two</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

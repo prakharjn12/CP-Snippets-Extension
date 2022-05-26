@@ -1,0 +1,21 @@
+<snippet>
+  <content><![CDATA[
+ll binpow(ll x,ll y)                 
+{
+   ll ans=1;
+   x%=mod;
+   while (y)
+    {
+        if(y%2==1) ans=(ans*x);
+        ans%=mod;
+        y = y/2; 
+        x = (x * x) % mod;
+    }
+    return ans;
+}
+]]></content>
+  <tabTrigger>binpow</tabTrigger>
+  <description>nCr%mod</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

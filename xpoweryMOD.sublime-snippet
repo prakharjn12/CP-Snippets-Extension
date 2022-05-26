@@ -1,0 +1,25 @@
+<snippet>
+  <content><![CDATA[
+long long int xpoweryMOD(long long int x, long long int y, int mod)
+{
+  long long int res = 1;
+  /*
+  it depends sometimes on questions too,
+  whether pow(0,0) is 1 or 0
+  So change accordingly
+  */
+  if (x == 0)return 0;
+  while (y)
+  {
+    if (y & 1)(res *= x) %= mod;
+    y >>= 1;
+    (x *= x) %= mod;
+  }
+  return res;
+}
+]]></content>
+  <tabTrigger>xpoweryMOD</tabTrigger>
+  <description>(x^y)%mod</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

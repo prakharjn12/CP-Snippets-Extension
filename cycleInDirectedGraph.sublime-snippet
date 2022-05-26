@@ -1,0 +1,32 @@
+<snippet>
+  <content><![CDATA[
+//call cycleInDirectedGraph to check cycle
+bool dfs(int s, vector<bool> &vis, vector<bool> &recSt, vector<int> adj[])
+{
+   recSt[s] = vis[s] = true;
+   for (int v : adj[s]) {
+      if (!vis[v]) {
+         if (dfs(v, vis, recSt, adj))return true;
+      }
+      else if (recSt[v])return true;
+   }
+   recSt[s] = false;
+   return false;
+}
+
+bool cycleInDirectedGraph(vector<int> adj[], int n)
+{
+   vector<bool> vis(n, false), recSt(n, false);
+   for (int u = 0; u < n; u++) {
+      if (!vis[u]) {
+         if (dfs(u, vis, recSt, adj))return true;
+      }
+   }
+   return false;
+}
+]]></content>
+  <tabTrigger>cycleInDirectedGraph</tabTrigger>
+  <description>Check cycle in directed Graph</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

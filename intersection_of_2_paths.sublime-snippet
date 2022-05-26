@@ -1,0 +1,37 @@
+<snippet>
+  <content><![CDATA[
+ll intersection(ll l1,ll a, ll l2, ll b) 
+// intersection of two straight paths (l1,a) and (l2,b)
+{
+  if(!is_ancestor(l2,a)) return 0;
+  ll x=lca(a,b);
+  if(depth[l1]>depth[l2])
+  {
+    if(is_ancestor(l1,x)) return dist(l1,x);
+    else return 0;
+  }
+  else
+  {
+    if(is_ancestor(l2,x)) return dist(l2,x);
+    else return 0;
+  }
+  return 0;
+}
+ll solve(ll a,ll b,ll c,ll d)
+{
+  // total diastance a-b minus common part of a-b and c-d
+  ll l1=lca(a,b);
+  ll l2=lca(c,d);
+  ll ans=dist(a,b);
+  ans-=intersection(l1,a,l2,c);
+  ans-=intersection(l1,a,l2,d);
+  ans-=intersection(l1,b,l2,c);
+  ans-=intersection(l1,b,l2,d);
+  return ans;
+}
+]]></content>
+  <tabTrigger>intersection_of_2_paths</tabTrigger>
+  <description>intersection of two paths a-b and c-d in a tree</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

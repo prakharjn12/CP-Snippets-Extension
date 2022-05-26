@@ -1,0 +1,32 @@
+<snippet>
+  <content><![CDATA[
+struct DSU {
+  ll n;
+  vector<ll> dsu;
+  void init(ll nn)
+  { n=nn;
+    dsu.resize(n+1);
+    rep(i,1,n) dsu[i]=i;
+  }
+  ll get(ll u) {
+    return dsu[u] == u ? u : dsu[u] = get(dsu[u]);
+  }
+  bool merge(ll u, ll v) {
+    u = get(u), v = get(v);
+    if (u == v) return 0;
+    if(u<v) dsu[v]=u;
+    else dsu[u]=v;
+    return 1;
+  }
+};
+// DSU dsu;
+// dsu.init(n);
+// dsu.get(u);
+// dsu.merge(u,v);
+
+]]></content>
+  <tabTrigger>dsu</tabTrigger>
+  <description>dsu</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

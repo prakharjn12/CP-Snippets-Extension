@@ -1,0 +1,62 @@
+<snippet>
+  <content><![CDATA[
+const ll l=30;   //log2(n)
+const ll N=100005;
+vll vec[N],tr[N];
+ll tin[N],tout[N],loww[N];
+set<pll>bridges;
+ll vis[N];
+ll timer;
+
+struct DSU {
+  ll n;
+  vector<ll> dsu;
+  void init(ll nn)
+  { n=nn;
+    dsu.resize(n+1);
+    rep(i,1,n) dsu[i]=i;
+  }
+  ll get(ll u) {
+    return dsu[u] == u ? u : dsu[u] = get(dsu[u]);
+  }
+  bool merge(ll u, ll v) {
+    u = get(u), v = get(v);
+    if (u == v) return 0;
+    if(u<v) dsu[v]=u;
+    else dsu[u]=v;
+    return 1;
+  }
+}dsu;
+
+void dfs(ll u, ll p)
+{
+  vis[u]=1;
+  tin[u]=loww[u]=timer++;
+  ll any=0,child=0;
+  for(ll v:vec[u])
+  {
+  
+    if(!vis[v]) {
+    child++;
+      dfs(v,u);
+      any+= loww[v]>=tin[u];
+        if(loww[v]>tin[u]) bridges.insert({u,v});
+        else dsu.merge(u,v);
+        loww[u]=min(loww[u],loww[v]);    
+      }
+    else if(v!=p) 
+      {
+        loww[u]=min(loww[u],tin[v]);
+      }
+  }
+  tout[u]=timer++;
+}
+// dsu.init(n);
+// timer=1;
+// dfs(1,0);
+]]></content>
+  <tabTrigger>bridge_tree</tabTrigger>
+  <description>bridge tree</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

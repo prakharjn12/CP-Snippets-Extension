@@ -1,0 +1,103 @@
+<snippet>
+  <content><![CDATA[
+
+const ll N=1005;
+vector<ll>vec[N];  //original tree
+vector<ll>vec2[N]; // centroid tree
+ll tin[N];
+ll tout[N];
+ll depth[N];
+ll up[N][l+1];
+ll timer;
+struct CentroidDecomposition {
+
+    vector<set<ll>> tree;
+    vector<ll>dad;
+    vector<ll>subtree;
+    ll n;
+    void init(ll nn)
+    {
+      n=nn;
+      
+      dad.resize(n+1);
+      subtree.resize(n+1);
+      tree.resize(n+1);
+      rep(i,0,n) dad[i]=0;
+      rep(i,0,n) subtree[i]=0;
+      rep(i,0,n) tree[i].clear();
+      rep(i,0,n) vec2[i].clear();
+
+      rep(i,1,n)
+      {
+        tin[i]=tout[i]=depth[i]=0;
+        rep(j,0,l-1) up[i][j]=0;
+      }
+    }
+
+    void build(vll vec[])
+    {
+      rep(i,1,n)
+        for(ll v:vec[i])
+        {
+            tree[i].insert(v);
+            tree[v].insert(i);
+        }
+       
+      build(1,0);
+        
+      rep(i,1,n)
+        {
+            if(i==dad[i]) continue;
+            vec2[i].pb(dad[i]);
+            vec2[dad[i]].pb(i);
+        }
+    }
+
+    void build(ll u, ll p) 
+    {
+        ll n = dfs(u, p); // find the size of each subtree
+        ll centroid = dfs(u, p, n); // find the centroid
+        if (p == 0) p = centroid; // dad of root is the root itself
+        dad[centroid] = p;
+
+        vector<ll>to;
+        for (auto v:tree[centroid]) to.pb(v);
+        
+        for(ll v:to)
+          {
+            tree[centroid].erase(v), // remove the edge to disconnect
+            tree[v].erase(centroid), // the component from the tree
+            build(v, centroid); 
+          }
+    
+    }
+
+    ll dfs(ll u, ll p)
+    {
+        subtree[u] = 1;
+        for (ll v:tree[u])
+        {
+          if(v==p) continue;
+          subtree[u]+=dfs(v,u);
+        }
+        return subtree[u];
+    }
+
+    ll dfs(ll u, ll p, ll n)
+    {
+        for (auto v : tree[u])
+            if (v != p and subtree[v] > n/2) return dfs(v, u, n);
+
+        return u;
+    }
+}cd;
+  //  CentroidDecomposition cd;
+  //  cd.init(n);
+  //  cd.build(vec);
+
+]]></content>
+  <tabTrigger>centroid_decompose</tabTrigger>
+  <description>Centroid decomposition</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

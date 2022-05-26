@@ -1,0 +1,79 @@
+<snippet>
+  <content><![CDATA[
+struct node{
+  ll val;
+};
+struct segtree{
+ 
+    ll size=1,n;
+    vector<node>tree;
+    node base={0};
+
+    void init(ll nn){
+        n=nn;
+        while(size<n)size*=2;
+        tree.assign(2*size,base);
+    }
+    node merge(node s1,node s2)
+    {
+        node ans=base;
+        ans.val=s1.val+s2.val;
+        return ans;
+    }
+    void build(ll a[],ll x,ll l,ll r)
+    {
+        if(r==l)
+        {
+            tree[x].val=a[l];
+            return;
+        }
+        
+        ll m=(l+r)/2;
+        build(a,2*x,l,m);
+        build(a,2*x+1,m+1,r);
+        tree[x]=merge(tree[2*x],tree[2*x+1]);
+    }
+    void build(ll a[])
+    {
+        build(a,1,1,n);
+    }
+    void update(ll i,ll v,ll x,ll l,ll r)
+    {
+        if(r==l)
+        {
+          tree[x].val=v;
+          return;
+        }
+ 
+        ll m=(l+r)/2;
+        
+        if(i<=m) update(i,v,2*x,l,m);
+        else     update(i,v,2*x+1,m+1,r);
+        
+        tree[x]=merge(tree[2*x],tree[2*x+1]);   
+    }
+    void update(ll i,ll v)
+    {
+        update(i,v,1,1,n);
+    }
+    node query(ll ql,ll qr,ll x,ll l,ll r)
+    {
+        if(l>r || ql>qr || l>qr || ql>r)    return {0};
+        if(l>=ql and r<=qr) return tree[x];
+
+        ll m=(l+r)/2;
+        node s1=query(ql,qr,2*x,l,m);
+        node s2=query(ql,qr,2*x+1,m+1,r);
+        return merge(s1,s2);    
+    }
+    node query(ll ql,ll qr)
+    {
+        return query(ql,qr,1,1,n);
+    }
+}; 
+]]></content>
+  <tabTrigger>segtree</tabTrigger>
+  <description>segtree</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

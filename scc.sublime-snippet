@@ -1,0 +1,85 @@
+<snippet>
+  <content><![CDATA[
+const ll N=200005;
+vll vec[N];  //original graph
+vll vec2[N];  // reversed graph
+vvll comp; 
+ll vis[N];
+stack<ll>st;
+vll temp;
+map<ll,ll>ma;   //component to which a node belongs // 0 indexed
+vll con[N];   //condensed graph
+ll n;     
+
+void dfs(int u)  //build stack
+ {
+      vis[u]=1;
+      for(ll v:vec[u]) if(!vis[v]) dfs(v);
+      st.push(u);
+ }  
+ void dfs2(int u)  //build components after reversing graph
+ {
+      temp.pb(u);
+      vis[u]=1;
+      for(ll v:vec2[u]) if(!vis[v]) dfs2(v);
+ }
+  void build()  //building condensed graph
+  {
+    for(ll i=0;i<comp.size();i++) 
+      for(ll v:comp[i]) ma[v]=i;
+
+
+    rep(i,1,n)
+    {
+      for(ll v:vec[i])
+      {
+        if(ma[i]==ma[v]) continue;
+        con[ma[i]].pb(ma[v]);
+      }
+    }    
+  } 
+void scc_init()
+{  
+      ma.clear();
+      comp.resize(0);
+      temp.clear();
+      while(st.size()) st.pop();
+      rep(i,1,n) 
+      {
+        con[i].clear();
+        vec2[i].clear();
+        vis[i]=0;
+      }
+
+    rep(i,1,n) if(!vis[i]) dfs(i); //build stack
+       
+    rep(i,1,n) for(ll v:vec[i]) vec2[v].pb(i);  //build reverse graph
+      
+    rep(i,1,n) vis[i]=0;
+
+      while(st.size())    
+      {
+        ll u=st.top();
+        st.pop();
+        if(!vis[u])
+        {
+           if(temp.size()>0)
+           comp.pb(temp);
+           temp.clear();
+           dfs2(u);
+        }
+      }
+      if(temp.size()) comp.pb(temp);
+      
+
+      build();
+      // rep(i,1,n) vec[i].clear();
+}
+
+// scc_init() after input directed graph vec
+]]></content>
+  <tabTrigger>scc</tabTrigger>
+  <description>strongly connected components</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

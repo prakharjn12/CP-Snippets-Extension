@@ -1,0 +1,19 @@
+<snippet>
+  <content><![CDATA[
+ll get(ordered_set &st)
+{
+  ll sz=st.size();
+  if(sz==0) return 0;
+  ll j=ran(0,sz-1);
+  ll val=*st.find_by_order(j);
+  st.erase(val);
+  return val;
+}
+//ordered_set st;
+//ll x=get(st) ; get a value from st and decrease size by 1
+]]></content>
+  <tabTrigger>get_random_from_set</tabTrigger>
+  <description>get_random_from_set</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>
