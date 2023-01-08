@@ -3,42 +3,42 @@
 const ll l=30;   //log2(n)
 const ll N=200005;
 vll vec[N];
-ll tin[N],tout[N],loww[N];
+ll tin[N],tout[N],low[N];
 ll vis[N];
-set<pll>edges;   //spanning edges
 set<pll>bridges;   // bridges
 set<ll>cuts;   // articulation points
 ll timer;
 void dfs(ll u, ll p)
 {
   vis[u]=1;
-  tin[u]=loww[u]=timer++;
-  ll any=0,child=0;
+
+  tin[u]=low[u]=timer++;
+  
+  ll child=0; //child of u that are not back edges
+  bool is_cut_vertex = 0; 
   for(ll v:vec[u])
   {
-    if(!vis[v]) {
-      edges.insert({u,v}); child++;
-      dfs(v,u);
-      any+= loww[v]>=tin[u];
+    if(vis[v])
+    {
+        if(v!=p) low[u]=min(low[u],tin[v]);
+        continue;
+    }
+    dfs(v,u);
+    child++;
 
-        if(loww[v]>tin[u]) bridges.insert({u,v});
-        loww[u]=min(loww[u],loww[v]);    
-      }
-    else if(v!=p) loww[u]=min(loww[u],tin[v]);
+    if(tin[u]<low[v]) bridges.insert({u,v});
+    if(tin[u]<=low[v]) is_cut_vertex=1;
+
+    low[u]=min(low[u],low[v]);
   }
-  
-  if(u==1) { if(child>=2) cuts.insert(u);}
-  else if(any) cuts.insert(u);
-
-  tout[u]=timer++;
-}
-bool is_ancestor(ll u, ll v) //check if u is ansector of v
-{
-  return tin[u]<=tin[v] && tout[u]>=tout[v];
+  if(u==1)
+  {
+    if(child>=2) cuts.insert(u);
+  }
+  else if(is_cut_vertex) cuts.insert(u);
 }
 //   timer=1;
 //   dfs(1,0);
-//   debug(edges);
 //   debug(bridges);
 //   debug(cuts);
 ]]></content>

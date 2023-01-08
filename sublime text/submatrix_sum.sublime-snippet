@@ -1,0 +1,38 @@
+<snippet>
+  <content><![CDATA[
+// const ll N=2005;
+
+ll a[N][N];
+struct sub_matrix_sum
+{
+
+    vvll dp;
+    ll n, m;
+
+    void init(ll nn, ll mm)
+    {
+        n=nn; m=mm;
+        dp.assign(n+1,vll(m+1,0));
+    }
+
+    void build()
+    {
+      rep(i,1,n) rep(j,1,m) 
+      dp[i][j]=dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + a[i][j];  
+    }
+    ll query(ll r1, ll c1 , ll r2 , ll c2)
+    {
+       if(c1>c2 || r1>r2) return 0; 
+       return dp[r2][c2] - dp[r1-1][c2] - dp[r2][c1-1] + dp[r1-1][c1-1];
+    }
+};
+ // sub_matrix_sum ss;
+ //  ss.init(n,m);
+ //  ss.build();
+ //  ss.query(2,2,3,3);
+]]></content>
+  <tabTrigger>submatrix_sum</tabTrigger>
+  <description>submatrix_sum</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

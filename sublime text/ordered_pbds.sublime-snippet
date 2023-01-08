@@ -1,0 +1,16 @@
+<snippet>
+  <content><![CDATA[
+// ordered_set
+// *find_by_order(i)  value at ith index (0-based)
+// order_of_key(x)    position of the element >=x (0 indexed)
+
+// ordered_multiset
+// insert in pairs (val,p++)
+// *find_by_order(i)  iterator at ith index (0-based)
+// order_of_key({x,high}) position of the element > x (0 indexed)  
+]]></content>
+  <tabTrigger>ordered pbds</tabTrigger>
+  <description>pbds</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>
