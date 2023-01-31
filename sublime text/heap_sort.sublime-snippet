@@ -1,0 +1,34 @@
+<snippet>
+  <content><![CDATA[
+void heapify(vll &a,ll n,ll i) 
+{
+    ll largest = i;
+    ll l = 2*i + 1;
+    ll r = 2*i + 2;
+  
+    if (l < n && a[l] > a[largest]) largest = l;
+    if (r < n && a[r] > a[largest]) largest = r;
+  
+    if (largest != i) 
+    {
+      swap(a[i], a[largest]);
+      heapify(a, n, largest);
+    }
+  }
+    void heap_sort(vll &a) 
+    {
+      ll n=a.size(); 
+      for(ll i= n/2 -1 ; i>=0;i--) heapify(a,n,i);
+      for (ll i = n - 1; i >= 0; i--) 
+      {
+        swap(a[0], a[i]);
+        heapify(a, i, 0);
+      }
+  }
+// heap_sort(a);
+]]></content>
+  <tabTrigger>heap_sort</tabTrigger>
+  <description>heap_sort</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

@@ -1,0 +1,16 @@
+{
+	"bubble_sort": {
+		"prefix": "bubble_sort",
+		"body": [
+		  "void bubble_sort(vll &a)",
+		  "{",
+		  "  ll n = a.size();",
+		  "  if (n <= 1)",
+		  "    return;",
+		  "  rep(i, 0, n - 2)",
+		  "      rep(j, 0, n - i - 2) if (a[j] > a[j + 1]) swap(a[j], a[j + 1]);",
+		  "}"
+		],
+		"description": "bubble_sort"
+	  }
+}

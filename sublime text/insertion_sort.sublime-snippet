@@ -1,0 +1,25 @@
+<snippet>
+  <content><![CDATA[
+void insertion_sort(vll &a)
+{
+  ll n = a.size();
+
+  rep(i, 1, n - 1)
+  {
+    ll key = a[i];
+    ll j = i - 1;
+
+    while (j >= 0 && key < a[j])
+    {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+}
+]]></content>
+  <tabTrigger>insertion_sort</tabTrigger>
+  <description>insertion_sort</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

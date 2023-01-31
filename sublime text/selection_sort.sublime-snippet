@@ -1,0 +1,20 @@
+<snippet>
+  <content><![CDATA[
+void selection_sort(vll &a)
+{
+
+  ll n = a.size();
+  rep(i, 0, n - 2)
+  {
+    ll min_idx = i;
+    rep(j, i + 1, n - 1) if (a[j] < a[min_idx]) min_idx = j;
+
+    swap(a[min_idx], a[i]);
+  }
+}
+]]></content>
+  <tabTrigger>selection_sort</tabTrigger>
+  <description>selection_sort</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>

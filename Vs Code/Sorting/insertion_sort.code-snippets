@@ -1,0 +1,25 @@
+{
+	"insertion_sort": {
+		"prefix": "insertion_sort",
+		"body": [
+		  "void insertion_sort(vll &a)",
+		  "{",
+		  "  ll n = a.size();",
+		  "",
+		  "  rep(i, 1, n - 1)",
+		  "  {",
+		  "    ll key = a[i];",
+		  "    ll j = i - 1;",
+		  "",
+		  "    while (j >= 0 && key < a[j])",
+		  "    {",
+		  "      a[j + 1] = a[j];",
+		  "      j--;",
+		  "    }",
+		  "    a[j + 1] = key;",
+		  "  }",
+		  "}"
+		],
+		"description": "insertion_sort"
+	  }	
+}

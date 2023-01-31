@@ -1,0 +1,16 @@
+<snippet>
+  <content><![CDATA[
+void bubble_sort(vll &a)
+{
+  ll n = a.size();
+  if (n <= 1)
+    return;
+  rep(i, 0, n - 2)
+      rep(j, 0, n - i - 2) if (a[j] > a[j + 1]) swap(a[j], a[j + 1]);
+}
+]]></content>
+  <tabTrigger>bubble_sort</tabTrigger>
+  <description>bubble_sort</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>
