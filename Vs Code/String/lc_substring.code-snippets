@@ -1,0 +1,32 @@
+{
+	"lc_substring": {
+		"prefix": "lc_substring",
+		"body": [
+		  " // returns the length of the longest common substrings",
+		  "// of two strings s and t, complexity O(n*m)",
+		  "ll lc_substring(string s,string t)  ",
+		  "{",
+		  "   ll n=s.size();",
+		  "   ll m=t.size();",
+		  "   s=' '+s; // convert to 1 indexing for easy code",
+		  "   t=' '+t; // convert to 1 indexing for easy code",
+		  "",
+		  "   if(n==0 || m==0) return 0;",
+		  "",
+		  "   ll dp[n+1][m+1];",
+		  "   rep(i,0,n) dp[i][0]=0;",
+		  "   rep(i,0,m) dp[0][i]=0;",
+		  "",
+		  "   rep(i,1,n)",
+		  "       rep(j,1,m)",
+		  "         if(s[i]==t[j]) dp[i][j]=dp[i-1][j-1]+1;",
+		  "         else dp[i][j]=0;",
+		  "         ",
+		  "     ll ans=0;",
+		  "     rep(i,0,n) rep(j,0,m) ans=max(ans,dp[i][j]);",
+		  "     return ans;",
+		  "}"
+		],
+		"description": "lc_substring"
+	  }
+}
