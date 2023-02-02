@@ -1,0 +1,37 @@
+<snippet>
+  <content><![CDATA[
+ll longest_palindromic_subsequence(string s)
+{
+  ll n=s.size();
+  
+  s=' '+s;
+
+  ll dp[n+1][n+1];
+
+  rep(i,0,n) dp[i][0]=dp[0][i]=0;
+
+  rep(i,1,n) dp[i][i]=1;
+  rep(i,1,n-1) dp[i][i+1]= ( s[i]==s[i+1] ? 2 : 1 );
+
+  ll len=3;
+  while(len<=n)
+  {
+    ll l=1 , r=len;
+    while(r<=n)
+    {
+      if(s[l]==s[r]) dp[l][r]=2+dp[l+1][r-1];
+      else dp[l][r]=max(dp[l][r-1],dp[l+1][r]);
+      l++; r++;
+    }
+    len++;
+  }    
+  ll ans=0;
+  rep(i,1,n) rep(j,i,n) ans=max(ans,dp[i][j]);
+  return ans;
+}
+]]></content>
+  <tabTrigger>longest_palindromic_subsequence</tabTrigger>
+  <description>longest_palindromic_subsequence</description>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope >source.python</scope > -->
+</snippet>
